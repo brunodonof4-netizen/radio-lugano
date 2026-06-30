@@ -226,57 +226,71 @@ class="absolute inset-0 h-full w-full object-cover"
 <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Grilla diaria</span>
 <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Programación</h2>
 </header>
+<!-- PROGRAMACIÓN: agregar nuevos programas duplicando un <li> y actualizando horario y nombre -->
 <ul class="space-y-2">
 <li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">06 – 08</span>
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">06 – 12</span>
 <div class="min-w-0 flex-1">
 <p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
 <p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
 </div>
 </li>
 <li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">08 – 11</span>
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">12 – 16</span>
 <div class="min-w-0 flex-1">
 <p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
 <p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
 </div>
 </li>
 <li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">11 – 13</span>
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">16 – 20</span>
 <div class="min-w-0 flex-1">
 <p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
 <p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
 </div>
 </li>
 <li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">13 – 16</span>
-<div class="min-w-0 flex-1">
-<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
-<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
-</div>
-</li>
-<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">16 – 19</span>
-<div class="min-w-0 flex-1">
-<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
-<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
-</div>
-</li>
-<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">19 – 22</span>
-<div class="min-w-0 flex-1">
-<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
-<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
-</div>
-</li>
-<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">22 – 06</span>
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">20 – 06</span>
 <div class="min-w-0 flex-1">
 <p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
 <p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
 </div>
 </li>
 </ul>
+</section>
+<!-- ESPACIO PUBLICITARIO SECTION -->
+<!-- Para agregar un anuncio: reemplazar la imagen placeholder por el arte del cliente (recomendado WebP, max 300KB) -->
+<!-- Si se decide usar video (WebM/VP9), reemplazar el <img> por <video autoplay muted loop playsinline> -->
+<section id="espacio-publicitario" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-10">
+  <header class="mb-4 flex items-end justify-between">
+    <div>
+      <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Publicidad</span>
+      <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Espacio publicitario</h2>
+    </div>
+  </header>
+  <!-- Banner placeholder -->
+  <div class="relative overflow-hidden rounded-2xl border border-dashed border-primary/40 bg-card/60">
+    <!-- Imagen placeholder — reemplazar src por el arte real cuando haya anunciante -->
+    <div class="flex min-h-[140px] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 px-6 py-10 sm:min-h-[180px]">
+      <div class="text-center">
+        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-primary/50 text-primary">
+          <i data-lucide="megaphone" class="h-6 w-6" aria-hidden="true"></i>
+        </div>
+        <p class="font-heading text-lg font-bold text-foreground">Poné tu aviso publicitario acá</p>
+        <p class="mt-1 text-sm text-muted-foreground">Llegá a la audiencia de Radio Lugano 1y2</p>
+      </div>
+    </div>
+  </div>
+  <!-- CTA con flecha apuntando al banner -->
+  <div class="mt-4 flex items-center gap-2">
+    <i data-lucide="arrow-up" class="h-4 w-4 shrink-0 text-primary" aria-hidden="true"></i>
+    <p class="text-sm text-muted-foreground">
+      Publicá tu anuncio acá —
+      <a href="https://wa.me/5491127857001?text=Hola%2C%20me%20interesa%20publicitar%20en%20Radio%20Lugano%201y2" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary underline underline-offset-2 hover:opacity-80">
+        consultanos por WhatsApp
+      </a>
+    </p>
+  </div>
 </section>
 <!-- QUIENES SOMOS SECTION (placeholder, pendiente de contenido institucional) -->
 <section id="quienes-somos" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
@@ -406,7 +420,7 @@ Ver en vivo
 </a>
 </div>
 <!-- contact form (Formspree) -->
-<form action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST" class="mt-6 space-y-3 border-t border-border pt-6">
+<form action="https://formspree.io/f/mbdvapel" method="POST" class="mt-6 space-y-3 border-t border-border pt-6">
 <p class="font-condensed text-xs uppercase tracking-[0.25em] text-primary">Escribinos</p>
 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 <input type="text" name="nombre" required placeholder="Tu nombre" class="rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none">
