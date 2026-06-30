@@ -6,516 +6,542 @@
 <title>Radio Lugano 1y2 — Una radio. Un viaje. Todo un país.</title>
 <meta name="description" content="Radio comunitaria de Villa Lugano, CABA. En vivo las 24hs. Una radio. Un viaje. Todo un país.">
 <meta name="theme-color" content="#07070a">
-
 <!-- Fuentes (next/font/google -> Google Fonts CDN) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <!-- Tailwind Play CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ['"Work Sans"', 'sans-serif'],
-          heading: ['Cinzel', 'serif'],
-          condensed: ['Oswald', 'sans-serif'],
-        },
-        colors: {
-          background: '#08080b',
-          foreground: '#ededf2',
-          card: '#0e0e14',
-          'card-foreground': '#ededf2',
-          primary: { DEFAULT: '#8b5cf6', foreground: '#ffffff' },
-          secondary: { DEFAULT: '#16161e', foreground: '#ededf2' },
-          muted: { DEFAULT: '#14141b', foreground: '#9a9aa8' },
-          accent: { DEFAULT: '#1a1426', foreground: '#ededf2' },
-          live: { DEFAULT: '#e8344a', foreground: '#ffffff' },
-          border: '#20202b',
-          input: '#20202b',
-          ring: '#8b5cf6',
-        },
-        borderRadius: {
-          sm: 'calc(0.75rem * 0.6)',
-          md: 'calc(0.75rem * 0.8)',
-          lg: '0.75rem',
-          xl: 'calc(0.75rem * 1.4)',
-          '2xl': 'calc(0.75rem * 1.8)',
-          '3xl': 'calc(0.75rem * 2.2)',
-        },
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"Work Sans"', 'sans-serif'],
+        heading: ['Cinzel', 'serif'],
+        condensed: ['Oswald', 'sans-serif'],
+      },
+      colors: {
+        background: '#08080b',
+        foreground: '#ededf2',
+        card: '#0e0e14',
+        'card-foreground': '#ededf2',
+        primary: { DEFAULT: '#8b5cf6', foreground: '#ffffff' },
+        secondary: { DEFAULT: '#16161e', foreground: '#ededf2' },
+        muted: { DEFAULT: '#14141b', foreground: '#9a9aa8' },
+        accent: { DEFAULT: '#1a1426', foreground: '#ededf2' },
+        live: { DEFAULT: '#e8344a', foreground: '#ffffff' },
+        border: '#20202b',
+        input: '#20202b',
+        ring: '#8b5cf6',
+      },
+      borderRadius: {
+        sm: 'calc(0.75rem * 0.6)',
+        md: 'calc(0.75rem * 0.8)',
+        lg: '0.75rem',
+        xl: 'calc(0.75rem * 1.4)',
+        '2xl': 'calc(0.75rem * 1.8)',
+        '3xl': 'calc(0.75rem * 2.2)',
       },
     },
-  }
+  },
+}
 </script>
-
 <style>
-  html, body { background-color: #08080b; color: #ededf2; }
-  .dot-pattern-glow {
-    background-image:
-      radial-gradient(rgba(139,92,246,0.5) 1px, transparent 1.5px),
-      radial-gradient(rgba(232,52,74,0.35) 1px, transparent 1.5px);
-    background-size: 26px 26px, 26px 26px;
-    background-position: 0 0, 13px 13px;
-    -webkit-mask-image: radial-gradient(120% 80% at 78% 28%, black 0%, transparent 62%);
-    mask-image: radial-gradient(120% 80% at 78% 28%, black 0%, transparent 62%);
-  }
-  .play-ring {
-    background: conic-gradient(from 140deg, #8b5cf6, #e8344a, #8b5cf6);
-  }
-  .nowplaying-glow {
-    background: radial-gradient(closest-side, rgba(139,92,246,0.35), transparent 70%);
-  }
+html, body { background-color: #08080b; color: #ededf2; }
+.dot-pattern-glow {
+  background-image:
+    radial-gradient(rgba(139,92,246,0.5) 1px, transparent 1.5px),
+    radial-gradient(rgba(232,52,74,0.35) 1px, transparent 1.5px);
+  background-size: 26px 26px, 26px 26px;
+  background-position: 0 0, 13px 13px;
+  -webkit-mask-image: radial-gradient(120% 80% at 78% 28%, black 0%, transparent 62%);
+  mask-image: radial-gradient(120% 80% at 78% 28%, black 0%, transparent 62%);
+}
+.play-ring {
+  background: conic-gradient(from 140deg, #8b5cf6, #e8344a, #8b5cf6);
+}
+.nowplaying-glow {
+  background: radial-gradient(closest-side, rgba(139,92,246,0.35), transparent 70%);
+}
 </style>
 </head>
-
 <body class="min-h-screen bg-background font-sans antialiased">
-
-  <!-- SITE HEADER -->
-  <header class="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-    <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
-      <a href="#inicio" class="flex items-center gap-3">
-        <img src="./images/logo-emblem.png" alt="Logo de Radio Lugano 1y2: micrófono vintage con alas" width="44" height="44" class="h-11 w-11 rounded-md object-cover">
-        <span class="flex flex-col leading-none">
-          <span class="font-heading text-base font-bold tracking-wide text-foreground">
-            Radio Lugano <span class="text-primary">1y2</span>
-          </span>
-          <span class="font-condensed text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-            Villa Lugano · CABA
-          </span>
-        </span>
-      </a>
-      <span class="hidden items-center gap-2 rounded-full border border-live/40 bg-live/10 px-3 py-1 sm:flex">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-75"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-live"></span>
-        </span>
-        <span class="font-condensed text-xs font-semibold uppercase tracking-widest text-live">
-          En vivo
-        </span>
-      </span>
-    </div>
-  </header>
-
-  <div class="min-h-screen bg-background">
-    <main class="pb-24 md:pb-12">
-
-      <!-- HERO SECTION -->
-      <section id="inicio" class="relative overflow-hidden scroll-mt-20">
-        <div aria-hidden="true" class="dot-pattern-glow pointer-events-none absolute inset-0 opacity-[0.5]"></div>
-
-        <div class="relative mx-auto max-w-5xl px-4 pb-10 pt-10 sm:pt-14">
-          <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
-            <!-- left: copy -->
-            <div class="text-left">
-              <span class="inline-flex items-center gap-2 rounded-full border border-live/40 bg-live/10 px-3 py-1">
-                <span class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-75"></span>
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-live"></span>
-                </span>
-                <span class="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-live">
-                  En vivo las 24hs
-                </span>
-              </span>
-
-              <h1 class="mt-5 font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-                Radio Lugano <span class="text-primary">1y2</span>
-              </h1>
-
-              <p class="mt-4 max-w-md font-condensed text-lg uppercase tracking-[0.15em] text-muted-foreground">
-                Una radio. Un viaje. Todo un país.
-              </p>
-
-              <p class="mt-4 max-w-md leading-relaxed text-muted-foreground">
-                La radio comunitaria de Villa Lugano. Música, charla y la voz del
-                barrio, sonando todos los días.
-              </p>
-            </div>
-
-            <!-- right: large logo over glow -->
-            <div class="relative mx-auto w-full max-w-xs md:max-w-none">
-              <div aria-hidden="true" class="nowplaying-glow absolute inset-0 -z-0 blur-2xl"></div>
-              <img
-                src="./images/logo-emblem.png"
-                alt="Emblema de Radio Lugano 1y2: micrófono vintage cromado con alas negras y placa en forma de diamante"
-                width="520" height="520"
-                class="relative mx-auto h-auto w-full max-w-[340px] object-contain drop-shadow-[0_0_30px_rgba(139,92,246,0.25)] md:max-w-[420px]"
-              >
-            </div>
-          </div>
-
-          <!-- player block -->
-          <div class="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-[1.3fr_1fr]">
-            <div class="rounded-2xl border border-border bg-card p-5">
-              <!-- tabs -->
-              <div class="flex gap-1 rounded-xl bg-secondary p-1">
-                <button type="button" id="tab-vivo"
-                  class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors bg-primary text-primary-foreground">
-                  <i data-lucide="radio" class="h-4 w-4" aria-hidden="true"></i>
-                  Ver en vivo
-                </button>
-                <button type="button" id="tab-musica"
-                  class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors text-muted-foreground hover:text-foreground">
-                  <i data-lucide="music" class="h-4 w-4" aria-hidden="true"></i>
-                  Escuchar música
-                </button>
-              </div>
-
-              <!-- play control -->
-              <div class="mt-6 flex items-center gap-5">
-                <button type="button" id="play-toggle" aria-label="Reproducir transmisión"
-                  class="play-ring group relative grid h-20 w-20 shrink-0 place-items-center rounded-full p-[3px] transition-transform active:scale-95">
-                  <span class="grid h-full w-full place-items-center rounded-full bg-card">
-                    <i data-lucide="play" id="play-icon" class="ml-1 h-7 w-7 text-foreground" aria-hidden="true"></i>
-                    <i data-lucide="pause" id="pause-icon" class="hidden h-7 w-7 text-foreground" aria-hidden="true"></i>
-                  </span>
-                </button>
-
-                <div class="min-w-0">
-                  <p id="player-label" class="font-condensed text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    Transmisión en vivo
-                  </p>
-                  <p id="player-status" class="mt-1 truncate font-heading text-lg font-semibold text-foreground">
-                    Tocá play para escuchar
-                  </p>
-                  <div id="equalizer" class="mt-2 flex items-end gap-[3px]" aria-hidden="true">
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                    <span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- now playing card -->
-            <div class="rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5">
-              <span class="inline-flex items-center gap-2">
-                <span class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-75"></span>
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-live"></span>
-                </span>
-                <span class="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-live">
-                  Sonando ahora
-                </span>
-              </span>
-              <p class="mt-3 font-heading text-xl font-bold leading-tight text-foreground">
-                La Mañana del Barrio
-              </p>
-              <p class="mt-1 text-sm text-muted-foreground">
-                con Carlos Funes · 08:00 a 11:00
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- LIVE SECTION -->
-      <section id="en-vivo" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
-        <header class="mb-6">
-          <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Audio · Video</span>
-          <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">En vivo</h2>
-        </header>
-
-        <div class="overflow-hidden rounded-2xl border border-border bg-card">
-          <div class="relative aspect-video w-full" id="live-video-wrap">
-            <button type="button" id="live-play-btn" class="group absolute inset-0 h-full w-full" aria-label="Cargar y reproducir el video en vivo">
-              <img
-                src="./images/live-thumbnail.png"
-                alt="Estudio de Radio Lugano 1y2 con micrófono vintage y consola iluminada"
-                class="absolute inset-0 h-full w-full object-cover"
-              >
-              <span class="absolute inset-0 bg-background/30 transition-colors group-hover:bg-background/20"></span>
-              <span class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-md bg-live px-2.5 py-1">
-                <span class="h-2 w-2 rounded-full bg-live-foreground"></span>
-                <span class="font-condensed text-xs font-bold uppercase tracking-widest text-live-foreground">En vivo</span>
-              </span>
-              <span class="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-primary/90 shadow-lg shadow-primary/30 transition-transform group-hover:scale-110">
-                <i data-lucide="play" class="ml-1 h-7 w-7 text-primary-foreground" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between gap-4 border-t border-border px-5 py-4">
-            <div>
-              <p class="font-heading text-base font-semibold text-foreground">Transmisión en directo</p>
-              <p class="text-sm text-muted-foreground">El video se carga solo cuando lo reproducís.</p>
-            </div>
-            <span class="font-condensed text-xs uppercase tracking-widest text-muted-foreground">YouTube</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- SCHEDULE SECTION -->
-      <section id="programacion" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
-        <header class="mb-6">
-          <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Grilla diaria</span>
-          <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Programación</h2>
-        </header>
-
-        <ul class="space-y-2">
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">06 – 08</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">MQ</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">Amanece en Lugano</p>
-              <p class="truncate text-sm text-muted-foreground">Marta Quiroga</p>
-            </div>
-          </li>
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">08 – 11</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">CF</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">La Mañana del Barrio</p>
-              <p class="truncate text-sm text-muted-foreground">Carlos Funes</p>
-            </div>
-            <span class="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-live/15 px-2 py-1">
-              <span class="relative flex h-1.5 w-1.5">
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-75"></span>
-                <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-live"></span>
-              </span>
-              <span class="font-condensed text-[10px] font-bold uppercase tracking-widest text-live">Ahora</span>
-            </span>
-          </li>
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">11 – 13</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">LT</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">Cumbia y Café</p>
-              <p class="truncate text-sm text-muted-foreground">Dúo Las Torres</p>
-            </div>
-          </li>
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">13 – 16</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">PA</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">Sobremesa Federal</p>
-              <p class="truncate text-sm text-muted-foreground">Pedro Ávila</p>
-            </div>
-          </li>
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">16 – 19</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">SM</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">Ruta Sonora</p>
-              <p class="truncate text-sm text-muted-foreground">Sofía Medina</p>
-            </div>
-          </li>
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">19 – 22</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">EL</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">Voces del Sur</p>
-              <p class="truncate text-sm text-muted-foreground">Equipo Lugano</p>
-            </div>
-          </li>
-          <li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
-            <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">22 – 06</span>
-            <span aria-hidden="true" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/15 font-heading text-sm font-bold text-primary">TV</span>
-            <div class="min-w-0 flex-1">
-              <p class="truncate font-heading text-base font-semibold text-foreground">Trasnoche Viajera</p>
-              <p class="truncate text-sm text-muted-foreground">Selección automática</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <!-- CONTACT SECTION -->
-      <section id="contacto" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
-        <header class="mb-6">
-          <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Sumate</span>
-          <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Contacto</h2>
-        </header>
-
-        <div class="rounded-2xl border border-border bg-card p-6">
-          <!-- socials -->
-          <ul class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <li>
-              <a href="#" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
-                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
-                    <rect x="2" y="2" width="20" height="20" rx="5"></rect>
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
-                  </svg>
-                </span>
-                <span class="min-w-0">
-                  <span class="block font-condensed text-sm uppercase tracking-wider text-foreground">Instagram</span>
-                  <span class="block truncate text-xs text-muted-foreground">@radiolugano1y2</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
-                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
-                    <path d="M22 8.4a3 3 0 0 0-2.1-2.1C18 5.8 12 5.8 12 5.8s-6 0-7.9.5A3 3 0 0 0 2 8.4 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.6a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22.4 12 31 31 0 0 0 22 8.4Z"></path>
-                    <path d="m10 15 5-3-5-3Z" fill="currentColor" stroke="none"></path>
-                  </svg>
-                </span>
-                <span class="min-w-0">
-                  <span class="block font-condensed text-sm uppercase tracking-wider text-foreground">YouTube</span>
-                  <span class="block truncate text-xs text-muted-foreground">Radio Lugano 1y2</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
-                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
-                  <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
-                    <path d="M16.5 3c.3 2.1 1.5 3.6 3.5 4v2.6c-1.2.1-2.4-.2-3.5-.8v5.9a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.1v2.7a3 3 0 1 0 2.1 2.9V3h2.7Z"></path>
-                  </svg>
-                </span>
-                <span class="min-w-0">
-                  <span class="block font-condensed text-sm uppercase tracking-wider text-foreground">TikTok</span>
-                  <span class="block truncate text-xs text-muted-foreground">@radiolugano1y2</span>
-                </span>
-              </a>
-            </li>
-          </ul>
-
-          <!-- CTAs -->
-          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a href="#" class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-condensed text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
-                <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.4-.7-2.9-1.2-4.7-4.1-4.8-4.3-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.1.3.6 1.1 1.4 1.7 1 .8 1.7 1 2 1.2.3.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.5.3.1.2.1.6-.1 1.2Z"></path>
-              </svg>
-              Escribinos por WhatsApp
-            </a>
-            <a href="#en-vivo" class="flex flex-1 items-center justify-center gap-2 rounded-xl border border-live px-5 py-3 font-condensed text-sm font-semibold uppercase tracking-wider text-live transition-colors hover:bg-live/10">
-              <i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
-              Ver en vivo
-            </a>
-          </div>
-
-          <!-- address -->
-          <div class="mt-6 flex items-start gap-3 border-t border-border pt-5">
-            <i data-lucide="map-pin" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true"></i>
-            <p class="text-sm leading-relaxed text-muted-foreground">
-              <span class="font-condensed uppercase tracking-wider text-foreground">Villa Lugano</span>
-              <br>
-              Comuna 8 · CABA, Argentina
-            </p>
-          </div>
-        </div>
-
-        <!-- monoblocks skyline motif -->
-        <div class="relative mt-10 flex h-40 items-end justify-center overflow-hidden sm:h-52">
-          <div aria-hidden="true" class="absolute inset-0" style="background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(139,92,246,0.35), transparent 70%);"></div>
-          <img
-            src="./images/monoblocks-skyline.png"
-            alt="Silueta de los monoblocks característicos de Villa Lugano"
-            class="relative h-full w-auto max-w-full object-contain object-bottom"
-          >
-          <p class="mt-3 text-center font-condensed text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Una radio. Un viaje. Todo un país.
-          </p>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- BOTTOM NAV (mobile) -->
-    <nav aria-label="Navegación principal" class="fixed inset-x-0 bottom-0 z-50 border-t border-border/70 bg-background/90 backdrop-blur-lg md:hidden">
-      <ul class="mx-auto flex max-w-md items-stretch justify-around px-2" style="padding-bottom: env(safe-area-inset-bottom);">
-        <li class="flex-1">
-          <a href="#inicio" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
-            <i data-lucide="house" class="h-5 w-5" aria-hidden="true"></i>
-            <span class="font-condensed text-[10px] uppercase tracking-wider">Inicio</span>
-          </a>
-        </li>
-        <li class="flex-1">
-          <a href="#en-vivo" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
-            <i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
-            <span class="font-condensed text-[10px] uppercase tracking-wider">En vivo</span>
-          </a>
-        </li>
-        <li class="flex-1">
-          <a href="#programacion" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
-            <i data-lucide="calendar-days" class="h-5 w-5" aria-hidden="true"></i>
-            <span class="font-condensed text-[10px] uppercase tracking-wider">Programación</span>
-          </a>
-        </li>
-        <li class="flex-1">
-          <a href="#contacto" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
-            <i data-lucide="message-circle" class="h-5 w-5" aria-hidden="true"></i>
-            <span class="font-condensed text-[10px] uppercase tracking-wider">Contacto</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Lucide icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    lucide.createIcons();
-
-    // --- Tabs Vivo / Música ---
-    const tabVivo = document.getElementById('tab-vivo');
-    const tabMusica = document.getElementById('tab-musica');
-    const playerLabel = document.getElementById('player-label');
-    let currentTab = 'vivo';
-
-    function setTab(tab) {
-      currentTab = tab;
-      const activeClasses = ['bg-primary', 'text-primary-foreground'];
-      const inactiveClasses = ['text-muted-foreground'];
-      if (tab === 'vivo') {
-        tabVivo.classList.add(...activeClasses);
-        tabVivo.classList.remove(...inactiveClasses);
-        tabMusica.classList.remove(...activeClasses);
-        tabMusica.classList.add(...inactiveClasses);
-      } else {
-        tabMusica.classList.add(...activeClasses);
-        tabMusica.classList.remove(...inactiveClasses);
-        tabVivo.classList.remove(...activeClasses);
-        tabVivo.classList.add(...inactiveClasses);
-      }
-      playerLabel.textContent = tab === 'vivo' ? 'Transmisión en vivo' : 'Música continua';
-    }
-    tabVivo.addEventListener('click', () => setTab('vivo'));
-    tabMusica.addEventListener('click', () => setTab('musica'));
-
-    // --- Play / Pause toggle ---
-    const playToggle = document.getElementById('play-toggle');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    const playerStatus = document.getElementById('player-status');
-    const equalizerBars = document.querySelectorAll('#equalizer span');
-    const barHeights = [10, 18, 8, 22, 14, 20, 9, 16, 12];
-    let playing = false;
-
-    playToggle.addEventListener('click', () => {
-      playing = !playing;
-      playIcon.classList.toggle('hidden', playing);
-      pauseIcon.classList.toggle('hidden', !playing);
-      playToggle.setAttribute('aria-label', playing ? 'Pausar transmisión' : 'Reproducir transmisión');
-      playerStatus.textContent = playing ? 'Reproduciendo…' : 'Tocá play para escuchar';
-      equalizerBars.forEach((bar, i) => {
-        bar.style.height = (playing ? barHeights[i] : 4) + 'px';
-        bar.classList.toggle('animate-pulse', playing);
-      });
-    });
-
-    // --- Live video lazy-load ---
-    document.getElementById('live-play-btn').addEventListener('click', function () {
-      const wrap = document.getElementById('live-video-wrap');
-      wrap.innerHTML = `
-        <iframe
-          title="Transmisión en vivo de Radio Lugano 1y2"
-          src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1"
-          class="absolute inset-0 h-full w-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>`;
-    });
-  </script>
+<!-- TOP STREAMING BANNER -->
+<div class="sticky top-0 z-50 bg-primary py-1.5 text-center">
+<p class="font-condensed text-[11px] font-semibold uppercase tracking-[0.25em] text-primary-foreground">
+Streaming en formato radio
+</p>
+</div>
+<!-- SITE HEADER -->
+<header class="sticky top-[26px] z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
+<a href="#inicio" class="flex items-center gap-3">
+<img src="./images/logo-emblem.webp" alt="Logo de Radio Lugano 1y2: micrófono vintage con alas roja y azul" width="44" height="44" class="h-11 w-11 object-contain">
+<span class="flex flex-col leading-none">
+<span class="font-heading text-base font-bold tracking-wide text-foreground">
+Radio Lugano <span class="text-primary">1y2</span>
+</span>
+</span>
+</a>
+<a href="#quienes-somos" class="hidden items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 sm:flex">
+<i data-lucide="info" class="h-3.5 w-3.5 text-primary" aria-hidden="true"></i>
+<span class="font-condensed text-xs font-semibold uppercase tracking-widest text-primary">
+Quiénes somos
+</span>
+</a>
+</div>
+</header>
+<div class="min-h-screen bg-background">
+<main class="pb-24 md:pb-12">
+<!-- HERO SECTION -->
+<section id="inicio" class="relative overflow-hidden scroll-mt-20">
+<div aria-hidden="true" class="dot-pattern-glow pointer-events-none absolute inset-0 opacity-[0.5]"></div>
+<div class="relative mx-auto max-w-5xl px-4 pb-10 pt-10 sm:pt-14">
+<div class="grid grid-cols-1 items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
+<!-- left: copy -->
+<div class="text-left">
+<h1 class="font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+Radio Lugano <span class="text-primary">1y2</span>
+</h1>
+<p class="mt-4 max-w-md font-condensed text-lg uppercase tracking-[0.15em] text-muted-foreground">
+Una radio. Un viaje. Todo un país.
+</p>
+<p class="mt-4 max-w-md leading-relaxed text-muted-foreground">
+La radio comunitaria de Villa Lugano. Música, charla y la voz del
+barrio, sonando todos los días.
+</p>
+</div>
+<!-- right: large logo over glow -->
+<div class="relative mx-auto w-full max-w-xs md:max-w-none">
+<div aria-hidden="true" class="absolute inset-0 -z-0 blur-2xl" style="background: linear-gradient(120deg, rgba(232,52,74,0.35), transparent 45%, transparent 55%, rgba(59,98,232,0.35));"></div>
+<img
+src="./images/logo-emblem.webp"
+alt="Emblema de Radio Lugano 1y2: micrófono vintage cromado con ala roja y ala azul"
+width="900" height="836"
+class="relative mx-auto h-auto w-full max-w-[340px] object-contain drop-shadow-[0_0_30px_rgba(139,92,246,0.2)] md:max-w-[420px]"
+>
+</div>
+</div>
+<!-- player block -->
+<div class="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-[1.3fr_1fr]">
+<div class="rounded-2xl border border-border bg-card p-5">
+<!-- tabs -->
+<div class="flex gap-1 rounded-xl bg-secondary p-1">
+<button type="button" id="tab-vivo"
+class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors bg-primary text-primary-foreground">
+<i data-lucide="radio" class="h-4 w-4" aria-hidden="true"></i>
+Ver en vivo
+</button>
+<button type="button" id="tab-musica"
+class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors text-muted-foreground hover:text-foreground">
+<i data-lucide="music" class="h-4 w-4" aria-hidden="true"></i>
+Escuchar música
+</button>
+</div>
+<!-- play control -->
+<div class="mt-6 flex items-center gap-5">
+<button type="button" id="play-toggle" aria-label="Reproducir transmisión"
+class="play-ring group relative grid h-20 w-20 shrink-0 place-items-center rounded-full p-[3px] transition-transform active:scale-95">
+<span class="grid h-full w-full place-items-center rounded-full bg-card">
+<i data-lucide="play" id="play-icon" class="ml-1 h-7 w-7 text-foreground" aria-hidden="true"></i>
+<i data-lucide="pause" id="pause-icon" class="hidden h-7 w-7 text-foreground" aria-hidden="true"></i>
+</span>
+</button>
+<div class="min-w-0">
+<p id="player-label" class="font-condensed text-xs uppercase tracking-[0.2em] text-muted-foreground">
+Transmisión en vivo
+</p>
+<p id="player-status" class="mt-1 truncate font-heading text-lg font-semibold text-foreground">
+Tocá play para escuchar
+</p>
+<div id="equalizer" class="mt-2 flex items-end gap-[3px]" aria-hidden="true">
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+<span class="w-[3px] rounded-full bg-primary/70" style="height:4px"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- now playing card -->
+<div class="rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5">
+<span class="inline-flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-75"></span>
+<span class="relative inline-flex h-2 w-2 rounded-full bg-live"></span>
+</span>
+<span class="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-live">
+Sonando ahora
+</span>
+</span>
+<p class="mt-3 font-heading text-xl font-bold leading-tight text-foreground">
+La Mañana del Barrio
+</p>
+<p class="mt-1 text-sm text-muted-foreground">
+con Carlos Funes · 08:00 a 11:00
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- LIVE SECTION -->
+<section id="en-vivo" class="relative mx-auto max-w-6xl scroll-mt-20 px-4 py-12">
+<header class="mb-6">
+<span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Audio · Video</span>
+<h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">En vivo</h2>
+</header>
+<div class="overflow-hidden rounded-2xl border border-border bg-card">
+<div class="relative aspect-video w-full" id="live-video-wrap">
+<button type="button" id="live-play-btn" class="group absolute inset-0 h-full w-full" aria-label="Cargar y reproducir el video en vivo">
+<img
+src="./images/live-thumbnail.png"
+alt="Estudio de Radio Lugano 1y2 con micrófono vintage y consola iluminada"
+class="absolute inset-0 h-full w-full object-cover"
+>
+<span class="absolute inset-0 bg-background/30 transition-colors group-hover:bg-background/20"></span>
+<span class="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-primary/90 shadow-lg shadow-primary/30 transition-transform group-hover:scale-110">
+<i data-lucide="play" class="ml-1 h-7 w-7 text-primary-foreground" aria-hidden="true"></i>
+</span>
+</button>
+</div>
+<div class="flex items-center justify-between gap-4 border-t border-border px-5 py-4">
+<div>
+<p class="font-heading text-base font-semibold text-foreground">Transmisión en directo</p>
+<p class="text-sm text-muted-foreground">El video se carga solo cuando lo reproducís.</p>
+</div>
+<span class="font-condensed text-xs uppercase tracking-widest text-muted-foreground">YouTube</span>
+</div>
+</div>
+</section>
+<!-- SCHEDULE SECTION -->
+<section id="programacion" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
+<header class="mb-6">
+<span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Grilla diaria</span>
+<h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Programación</h2>
+</header>
+<ul class="space-y-2">
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">06 – 08</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">08 – 11</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">11 – 13</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">13 – 16</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">16 – 19</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">19 – 22</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">22 – 06</span>
+<div class="min-w-0 flex-1">
+<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
+<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+</div>
+</li>
+</ul>
+</section>
+<!-- QUIENES SOMOS SECTION (placeholder, pendiente de contenido institucional) -->
+<section id="quienes-somos" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
+<header class="mb-6">
+<span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Institucional</span>
+<h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Quiénes somos</h2>
+</header>
+<div class="rounded-2xl border border-border bg-card p-6 sm:p-8">
+<p class="font-heading text-xl font-semibold text-foreground">
+Bienvenidos a Radio Lugano 1y2 Viajeros.
+</p>
+<p class="mt-4 font-condensed text-base uppercase tracking-wide text-muted-foreground">
+Dos amigos.<br>
+Una radio streaming móvil.<br>
+Y toda Argentina por delante.
+</p>
+<p class="mt-4 leading-relaxed text-muted-foreground">
+Muy pronto comenzaremos un viaje recorriendo el país transmitiendo desde la ruta, visitando radios de cada pueblo y compartiendo historias reales, música y experiencias únicas.
+</p>
+<ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+<li class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
+<span aria-hidden="true">📍</span>
+<span class="text-sm text-foreground">Primera parada: Córdoba</span>
+</li>
+<li class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
+<span aria-hidden="true">🚐</span>
+<span class="text-sm text-foreground">Estudio Radio Móvil</span>
+</li>
+<li class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
+<span aria-hidden="true">📡</span>
+<span class="text-sm text-foreground">Streaming en vivo</span>
+</li>
+<li class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
+<span aria-hidden="true">🇦🇷</span>
+<span class="text-sm text-foreground">De Lugano a toda Argentina</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- CONTACT SECTION -->
+<section id="contacto" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
+<header class="mb-6">
+<span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Sumate</span>
+<h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Contacto</h2>
+</header>
+<div class="rounded-2xl border border-border bg-card p-6">
+<!-- socials -->
+<ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+<li>
+<a href="https://www.instagram.com/radiolugano1y2viajeros/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
+<span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
+<rect x="2" y="2" width="20" height="20" rx="5"></rect>
+<circle cx="12" cy="12" r="4"></circle>
+<circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+</svg>
+</span>
+<span class="min-w-0">
+<span class="block font-condensed text-sm uppercase tracking-wider text-foreground">Instagram</span>
+<span class="block truncate text-xs text-muted-foreground">@radiolugano1y2viajeros</span>
+</span>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/@RadioLugano1y2Viajeros" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
+<span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
+<path d="M22 8.4a3 3 0 0 0-2.1-2.1C18 5.8 12 5.8 12 5.8s-6 0-7.9.5A3 3 0 0 0 2 8.4 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.6a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22.4 12 31 31 0 0 0 22 8.4Z"></path>
+<path d="m10 15 5-3-5-3Z" fill="currentColor" stroke="none"></path>
+</svg>
+</span>
+<span class="min-w-0">
+<span class="block font-condensed text-sm uppercase tracking-wider text-foreground">YouTube</span>
+<span class="block truncate text-xs text-muted-foreground">@RadioLugano1y2Viajeros</span>
+</span>
+</a>
+</li>
+<li>
+<a href="https://www.tiktok.com/@radiolugano1y2viajeros" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
+<span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+<path d="M16.5 3c.3 2.1 1.5 3.6 3.5 4v2.6c-1.2.1-2.4-.2-3.5-.8v5.9a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.1v2.7a3 3 0 1 0 2.1 2.9V3h2.7Z"></path>
+</svg>
+</span>
+<span class="min-w-0">
+<span class="block font-condensed text-sm uppercase tracking-wider text-foreground">TikTok</span>
+<span class="block truncate text-xs text-muted-foreground">@radiolugano1y2viajeros</span>
+</span>
+</a>
+</li>
+<li>
+<a href="https://www.facebook.com/share/1EadGnbPbd/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
+<span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+<path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.9.3-1.5 1.6-1.5H16.5V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2V10.5H7.5v3H10V21h3.5Z"></path>
+</svg>
+</span>
+<span class="min-w-0">
+<span class="block font-condensed text-sm uppercase tracking-wider text-foreground">Facebook</span>
+<span class="block truncate text-xs text-muted-foreground">Radio Lugano 1y2</span>
+</span>
+</a>
+</li>
+<li>
+<a href="mailto:radiolugano1y2@gmail.com" class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3 transition-colors hover:border-primary/50">
+<span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+<i data-lucide="mail" class="h-5 w-5" aria-hidden="true"></i>
+</span>
+<span class="min-w-0">
+<span class="block font-condensed text-sm uppercase tracking-wider text-foreground">Email</span>
+<span class="block truncate text-xs text-muted-foreground">radiolugano1y2@gmail.com</span>
+</span>
+</a>
+</li>
+</ul>
+<!-- CTAs -->
+<div class="mt-6 flex flex-col gap-3 sm:flex-row">
+<a href="https://wa.me/5491127857001" target="_blank" rel="noopener noreferrer" class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-condensed text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90">
+<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+<path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.4-.7-2.9-1.2-4.7-4.1-4.8-4.3-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.1.3.6 1.1 1.4 1.7 1 .8 1.7 1 2 1.2.3.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.5.3.1.2.1.6-.1 1.2Z"></path>
+</svg>
+Escribinos por WhatsApp
+</a>
+<a href="#en-vivo" class="flex flex-1 items-center justify-center gap-2 rounded-xl border border-live px-5 py-3 font-condensed text-sm font-semibold uppercase tracking-wider text-live transition-colors hover:bg-live/10">
+<i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
+Ver en vivo
+</a>
+</div>
+<!-- contact form (Formspree) -->
+<form action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST" class="mt-6 space-y-3 border-t border-border pt-6">
+<p class="font-condensed text-xs uppercase tracking-[0.25em] text-primary">Escribinos</p>
+<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+<input type="text" name="nombre" required placeholder="Tu nombre" class="rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none">
+<input type="email" name="email" required placeholder="Tu email" class="rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none">
+</div>
+<textarea name="mensaje" required rows="4" placeholder="Tu mensaje" class="w-full rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"></textarea>
+<button type="submit" class="w-full rounded-xl bg-secondary px-5 py-3 font-condensed text-sm font-semibold uppercase tracking-wider text-foreground transition-colors hover:bg-secondary/70 sm:w-auto">
+Enviar mensaje
+</button>
+</form>
+<!-- address -->
+<div class="mt-6 flex items-start gap-3 border-t border-border pt-5">
+<i data-lucide="map-pin" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true"></i>
+<p class="text-sm leading-relaxed text-muted-foreground">
+<span class="font-condensed uppercase tracking-wider text-foreground">Estudio central: Parque Patricios</span>
+<br>
+CABA, Argentina
+</p>
+</div>
+</div>
+<!-- monoblocks skyline motif (full-bleed) -->
+<div class="relative left-1/2 right-1/2 mt-10 -ml-[50vw] -mr-[50vw] w-screen">
+<img
+src="./images/monoblocks-skyline.webp"
+alt="Silueta de los monoblocks característicos de Villa Lugano"
+class="block h-auto w-full object-cover"
+loading="lazy"
+width="1536" height="1024"
+>
+<div class="px-4 py-8 text-center">
+<p class="font-condensed text-xs uppercase tracking-[0.3em] text-muted-foreground">
+Una radio. Un viaje. Todo un país.
+</p>
+<p class="mt-3 font-condensed text-[11px] uppercase tracking-[0.2em] text-muted-foreground/70">
+Coproducción: Ayudante Producciones y Filosofía Producciones
+</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BOTTOM NAV (mobile) -->
+<nav aria-label="Navegación principal" class="fixed inset-x-0 bottom-0 z-50 border-t border-border/70 bg-background/90 backdrop-blur-lg md:hidden">
+<ul class="mx-auto flex max-w-md items-stretch justify-around px-1" style="padding-bottom: env(safe-area-inset-bottom);">
+<li class="flex-1">
+<a href="#inicio" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
+<i data-lucide="house" class="h-5 w-5" aria-hidden="true"></i>
+<span class="font-condensed text-[9px] uppercase tracking-wider">Inicio</span>
+</a>
+</li>
+<li class="flex-1">
+<a href="#en-vivo" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
+<i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
+<span class="font-condensed text-[9px] uppercase tracking-wider">Streaming</span>
+</a>
+</li>
+<li class="flex-1">
+<a href="#programacion" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
+<i data-lucide="calendar-days" class="h-5 w-5" aria-hidden="true"></i>
+<span class="font-condensed text-[9px] uppercase tracking-wider">Grilla</span>
+</a>
+</li>
+<li class="flex-1">
+<a href="#quienes-somos" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
+<i data-lucide="info" class="h-5 w-5" aria-hidden="true"></i>
+<span class="font-condensed text-[9px] uppercase tracking-wider">Quiénes</span>
+</a>
+</li>
+<li class="flex-1">
+<a href="#contacto" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
+<i data-lucide="message-circle" class="h-5 w-5" aria-hidden="true"></i>
+<span class="font-condensed text-[9px] uppercase tracking-wider">Contacto</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+lucide.createIcons();
+// --- Tabs Vivo / Música ---
+const tabVivo = document.getElementById('tab-vivo');
+const tabMusica = document.getElementById('tab-musica');
+const playerLabel = document.getElementById('player-label');
+let currentTab = 'vivo';
+function setTab(tab) {
+currentTab = tab;
+const activeClasses = ['bg-primary', 'text-primary-foreground'];
+const inactiveClasses = ['text-muted-foreground'];
+if (tab === 'vivo') {
+tabVivo.classList.add(...activeClasses);
+tabVivo.classList.remove(...inactiveClasses);
+tabMusica.classList.remove(...activeClasses);
+tabMusica.classList.add(...inactiveClasses);
+} else {
+tabMusica.classList.add(...activeClasses);
+tabMusica.classList.remove(...inactiveClasses);
+tabVivo.classList.remove(...activeClasses);
+tabVivo.classList.add(...inactiveClasses);
+}
+playerLabel.textContent = tab === 'vivo' ? 'Transmisión en vivo' : 'Música continua';
+}
+tabVivo.addEventListener('click', () => setTab('vivo'));
+tabMusica.addEventListener('click', () => setTab('musica'));
+// --- Play / Pause toggle ---
+const playToggle = document.getElementById('play-toggle');
+const playIcon = document.getElementById('play-icon');
+const pauseIcon = document.getElementById('pause-icon');
+const playerStatus = document.getElementById('player-status');
+const equalizerBars = document.querySelectorAll('#equalizer span');
+const barHeights = [10, 18, 8, 22, 14, 20, 9, 16, 12];
+let playing = false;
+playToggle.addEventListener('click', () => {
+playing = !playing;
+playIcon.classList.toggle('hidden', playing);
+pauseIcon.classList.toggle('hidden', !playing);
+playToggle.setAttribute('aria-label', playing ? 'Pausar transmisión' : 'Reproducir transmisión');
+playerStatus.textContent = playing ? 'Reproduciendo…' : 'Tocá play para escuchar';
+equalizerBars.forEach((bar, i) => {
+bar.style.height = (playing ? barHeights[i] : 4) + 'px';
+bar.classList.toggle('animate-pulse', playing);
+});
+});
+// --- Live video lazy-load ---
+document.getElementById('live-play-btn').addEventListener('click', function () {
+const wrap = document.getElementById('live-video-wrap');
+wrap.innerHTML = `
+<iframe
+title="Transmisión en vivo de Radio Lugano 1y2"
+src="https://www.youtube.com/embed/videoseries?list=UUSa9NVsrty5m2JtQgFot_qg&autoplay=1"
+class="absolute inset-0 h-full w-full"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen
+></iframe>`;
+});
+</script>
 </body>
 </html>
