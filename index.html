@@ -50,14 +50,19 @@ tailwind.config = {
 </script>
 <style>
 html, body { background-color: #08080b; color: #ededf2; }
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.75; }
+}
 .dot-pattern-glow {
   background-image:
-    radial-gradient(rgba(139,92,246,0.5) 1px, transparent 1.5px),
-    radial-gradient(rgba(232,52,74,0.35) 1px, transparent 1.5px);
+    radial-gradient(rgba(139,92,246,0.55) 1px, transparent 1.5px),
+    radial-gradient(rgba(232,52,74,0.4) 1px, transparent 1.5px);
   background-size: 26px 26px, 26px 26px;
   background-position: 0 0, 13px 13px;
   -webkit-mask-image: radial-gradient(120% 80% at 78% 28%, black 0%, transparent 62%);
   mask-image: radial-gradient(120% 80% at 78% 28%, black 0%, transparent 62%);
+  animation: dot-pulse 4s ease-in-out infinite;
 }
 .play-ring {
   background: conic-gradient(from 140deg, #8b5cf6, #e8344a, #8b5cf6);
@@ -97,25 +102,30 @@ Quiénes somos
 <main class="pb-24 md:pb-12">
 <!-- HERO SECTION -->
 <section id="inicio" class="relative overflow-hidden scroll-mt-20">
-<div aria-hidden="true" class="dot-pattern-glow pointer-events-none absolute inset-0 opacity-[0.5]"></div>
+<div aria-hidden="true" class="dot-pattern-glow pointer-events-none absolute inset-0"></div>
 <div class="relative mx-auto max-w-5xl px-4 pb-10 pt-10 sm:pt-14">
 <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
 <!-- left: copy -->
 <div class="text-left">
-<h1 class="font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-Radio Lugano <span class="text-primary">1y2</span>
+<h1 class="font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl" style="background: linear-gradient(90deg, #8b5cf6 0%, #e8344a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+Radio Lugano 1y2
 </h1>
 <p class="mt-4 max-w-md font-condensed text-lg uppercase tracking-[0.15em] text-muted-foreground">
 Una radio. Un viaje. Todo un país.
 </p>
 <p class="mt-4 max-w-md leading-relaxed text-muted-foreground">
-La radio comunitaria de Villa Lugano. Música, charla y la voz del
-barrio, sonando todos los días.
+Un proyecto de radio streaming itinerante para recorrer toda Argentina transmitiendo desde un Estudio Radio Móvil 🚐📡<br><br>
+Vamos a visitar radios locales, conocer historias reales, documentar cada viaje y conectar pueblos desde la ruta.<br><br>
+Esto no es solamente una radio.<br>
+Es una aventura.<br>
+Un sueño hecho realidad.<br>
+Y un viaje que recién comienza.<br><br>
+🇦🇷 De Lugano a toda Argentina.
 </p>
 </div>
 <!-- right: large logo over glow -->
 <div class="relative mx-auto w-full max-w-xs md:max-w-none">
-<div aria-hidden="true" class="absolute inset-0 -z-0 blur-2xl" style="background: linear-gradient(120deg, rgba(232,52,74,0.35), transparent 45%, transparent 55%, rgba(59,98,232,0.35));"></div>
+<div aria-hidden="true" class="absolute inset-0 -z-0 blur-2xl" style="background: linear-gradient(120deg, rgba(232,52,74,0.65), transparent 45%, transparent 55%, rgba(59,98,232,0.65));"></div>
 <img
 src="./images/logo-emblem.webp"
 alt="Emblema de Radio Lugano 1y2: micrófono vintage cromado con ala roja y ala azul"
@@ -420,7 +430,7 @@ Ver en vivo
 </a>
 </div>
 <!-- contact form (Formspree) -->
-<form action="https://formspree.io/f/mbdvapel" method="POST" class="mt-6 space-y-3 border-t border-border pt-6">
+<form action="https://formspree.io/f/mrewyyyd" method="POST" class="mt-6 space-y-3 border-t border-border pt-6">
 <p class="font-condensed text-xs uppercase tracking-[0.25em] text-primary">Escribinos</p>
 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 <input type="text" name="nombre" required placeholder="Tu nombre" class="rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none">
@@ -454,8 +464,8 @@ width="1536" height="1024"
 <p class="font-condensed text-xs uppercase tracking-[0.3em] text-muted-foreground">
 Una radio. Un viaje. Todo un país.
 </p>
-<p class="mt-3 font-condensed text-[11px] uppercase tracking-[0.2em] text-muted-foreground/70">
-Coproducción: Ayudante Producciones y Filosofía Producciones
+<p class="mt-3 px-4 font-condensed text-[11px] uppercase tracking-[0.2em] text-muted-foreground/70">
+Coproducción: Radio Lugano 1y2 Producciones y Filosofía Producciones
 </p>
 </div>
 </div>
