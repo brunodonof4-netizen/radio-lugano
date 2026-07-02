@@ -1,0 +1,9 @@
+{
+  "ciudades": [
+    { "nombre": "Buenos Aires (CABA)", "estado": "actual" },
+    { "nombre": "Córdoba", "estado": "proximo" },
+    { "nombre": "Mendoza", "estado": "pendiente" },
+    { "nombre": "Por confirmar", "estado": "pendiente" },
+    { "nombre": "Por confirmar", "estado": "pendiente" }
+  ]
+}

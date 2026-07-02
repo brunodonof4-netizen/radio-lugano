@@ -292,6 +292,22 @@ class="absolute inset-0 h-full w-full object-cover"
     </p>
   </div>
 </section>
+<!-- NUESTRA RUTA SECTION -->
+<section id="nuestra-ruta" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
+  <header class="mb-8">
+    <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">El viaje</span>
+    <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Nuestra ruta</h2>
+    <p class="mt-2 text-sm text-muted-foreground">Seguí el recorrido en tiempo real. La ruta se actualiza a medida que avanzamos.</p>
+  </header>
+  <div id="ruta-timeline" class="relative">
+    <!-- La línea vertical conectora -->
+    <div class="absolute left-[19px] top-4 bottom-4 w-[2px] bg-border" aria-hidden="true"></div>
+    <ul class="space-y-6" id="ruta-lista">
+      <!-- Se renderiza desde ruta.json via JS -->
+    </ul>
+  </div>
+  <p id="ruta-error" class="hidden text-sm text-muted-foreground">No se pudo cargar la ruta.</p>
+</section>
 <!-- QUIENES SOMOS SECTION (placeholder, pendiente de contenido institucional) -->
 <section id="quienes-somos" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
 <header class="mb-6">
@@ -483,6 +499,12 @@ Coproducción: Ayudante Producciones y Filosofía Producciones
 </a>
 </li>
 <li class="flex-1">
+<a href="#nuestra-ruta" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
+<i data-lucide="map-pin" class="h-5 w-5" aria-hidden="true"></i>
+<span class="font-condensed text-[9px] uppercase tracking-wider">Ruta</span>
+</a>
+</li>
+<li class="flex-1">
 <a href="#quienes-somos" class="flex flex-col items-center gap-1 py-2.5 text-muted-foreground transition-colors hover:text-primary active:text-primary">
 <i data-lucide="info" class="h-5 w-5" aria-hidden="true"></i>
 <span class="font-condensed text-[9px] uppercase tracking-wider">Quiénes</span>
@@ -545,6 +567,43 @@ bar.classList.toggle('animate-pulse', playing);
 });
 });
 // --- Live video lazy-load ---
+(function() {
+  const CONFIG = {
+    actual:    { icon: '📍', label: 'Estamos acá',       dot: 'bg-live',     text: 'text-live',     border: 'border-live/60'     },
+    proximo:   { icon: '➜',  label: 'Próximo destino',   dot: 'bg-primary',  text: 'text-primary',  border: 'border-primary/60'  },
+    visitado:  { icon: '✔',  label: 'Visitado',          dot: 'bg-primary/40', text: 'text-muted-foreground', border: 'border-border' },
+    pendiente: { icon: '○',  label: 'Pendiente',         dot: 'bg-border',   text: 'text-muted-foreground', border: 'border-border/40'   },
+  };
+
+  fetch('./ruta.json')
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(data => {
+      const lista = document.getElementById('ruta-lista');
+      if (!lista || !data.ciudades) return;
+      lista.innerHTML = data.ciudades.map(c => {
+        const cfg = CONFIG[c.estado] || CONFIG.pendiente;
+        const isPending = c.estado === 'pendiente' && c.nombre === 'Por confirmar';
+        return `
+        <li class="relative flex items-start gap-5">
+          <span class="relative z-10 mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${cfg.border} bg-card text-base">
+            ${cfg.icon}
+          </span>
+          <div class="flex-1 rounded-xl border ${cfg.border} bg-card/60 px-4 py-3">
+            <p class="font-heading text-base font-semibold ${isPending ? 'text-muted-foreground/50 italic' : 'text-foreground'}">
+              ${isPending ? 'Por confirmar' : c.nombre}
+            </p>
+            <p class="mt-0.5 font-condensed text-xs uppercase tracking-wider ${cfg.text}">
+              ${cfg.label}
+            </p>
+          </div>
+        </li>`;
+      }).join('');
+    })
+    .catch(() => {
+      document.getElementById('ruta-error').classList.remove('hidden');
+    });
+})();
+
 document.getElementById('live-play-btn').addEventListener('click', function () {
 const wrap = document.getElementById('live-video-wrap');
 wrap.innerHTML = `
