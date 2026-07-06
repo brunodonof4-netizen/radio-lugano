@@ -113,15 +113,6 @@ Radio Lugano 1y2
 <p class="mt-4 max-w-md font-condensed text-lg uppercase tracking-[0.15em] text-muted-foreground">
 Una radio. Un viaje. Todo un país.
 </p>
-<p class="mt-4 max-w-md leading-relaxed text-muted-foreground">
-Un proyecto de radio streaming itinerante para recorrer toda Argentina transmitiendo desde un Estudio Radio Móvil 🚐📡<br><br>
-Vamos a visitar radios locales, conocer historias reales, documentar cada viaje y conectar pueblos desde la ruta.<br><br>
-Esto no es solamente una radio.<br>
-Es una aventura.<br>
-Un sueño hecho realidad.<br>
-Y un viaje que recién comienza.<br><br>
-🇦🇷 De Lugano a toda Argentina.
-</p>
 </div>
 <!-- right: large logo over glow -->
 <div class="relative mx-auto w-full max-w-xs md:max-w-none">
@@ -135,20 +126,20 @@ class="relative mx-auto h-auto w-full max-w-[340px] object-contain drop-shadow-[
 </div>
 </div>
 <!-- player block -->
-<div class="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-[1.3fr_1fr]">
+<div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[1.3fr_1fr]">
 <div class="rounded-2xl border border-border bg-card p-5">
 <!-- tabs -->
 <div class="flex gap-1 rounded-xl bg-secondary p-1">
-<button type="button" id="tab-vivo"
+<button type="button" id="tab-audio"
 class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors bg-primary text-primary-foreground">
-<i data-lucide="radio" class="h-4 w-4" aria-hidden="true"></i>
-Ver en vivo
-</button>
-<button type="button" id="tab-musica"
-class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors text-muted-foreground hover:text-foreground">
 <i data-lucide="music" class="h-4 w-4" aria-hidden="true"></i>
-Escuchar música
+Audio
 </button>
+<a href="#en-vivo" id="tab-video"
+class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 font-condensed text-sm uppercase tracking-wider transition-colors text-muted-foreground hover:text-foreground">
+<i data-lucide="video" class="h-4 w-4" aria-hidden="true"></i>
+Video
+</a>
 </div>
 <!-- play control -->
 <div class="mt-6 flex items-center gap-5">
@@ -160,10 +151,7 @@ class="play-ring group relative grid h-20 w-20 shrink-0 place-items-center round
 </span>
 </button>
 <div class="min-w-0">
-<p id="player-label" class="font-condensed text-xs uppercase tracking-[0.2em] text-muted-foreground">
-Transmisión en vivo
-</p>
-<p id="player-status" class="mt-1 truncate font-heading text-lg font-semibold text-foreground">
+<p id="player-status" class="truncate font-heading text-lg font-semibold text-foreground">
 Tocá play para escuchar
 </p>
 <div id="equalizer" class="mt-2 flex items-end gap-[3px]" aria-hidden="true">
@@ -180,32 +168,22 @@ Tocá play para escuchar
 </div>
 </div>
 </div>
-<!-- now playing card -->
-<div class="rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5">
-<span class="inline-flex items-center gap-2">
-<span class="relative flex h-2 w-2">
-<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-75"></span>
-<span class="relative inline-flex h-2 w-2 rounded-full bg-live"></span>
+<!-- ver canal de streaming -->
+<a href="#en-vivo" class="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5 text-center transition-colors hover:border-primary/50">
+<span class="grid h-11 w-11 place-items-center rounded-full bg-primary/15 text-primary transition-transform group-hover:scale-105">
+<i data-lucide="youtube" class="h-5 w-5" aria-hidden="true"></i>
 </span>
-<span class="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-live">
-Sonando ahora
+<span class="font-condensed text-sm font-semibold uppercase tracking-wider text-foreground">
+Ver canal de streaming
 </span>
-</span>
-<p class="mt-3 font-heading text-xl font-bold leading-tight text-foreground">
-La Mañana del Barrio
-</p>
-<p class="mt-1 text-sm text-muted-foreground">
-con Carlos Funes · 08:00 a 11:00
-</p>
-</div>
+</a>
 </div>
 </div>
 </section>
 <!-- LIVE SECTION -->
-<section id="en-vivo" class="relative mx-auto max-w-6xl scroll-mt-20 px-4 py-12">
+<section id="en-vivo" class="relative mx-auto max-w-7xl scroll-mt-20 px-3 py-12 sm:px-4">
 <header class="mb-6">
-<span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Audio · Video</span>
-<h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">En vivo</h2>
+<h2 class="font-heading text-2xl font-bold tracking-tight sm:text-3xl">Streaming</h2>
 </header>
 <div class="overflow-hidden rounded-2xl border border-border bg-card">
 <div class="relative aspect-video w-full" id="live-video-wrap">
@@ -223,7 +201,6 @@ class="absolute inset-0 h-full w-full object-cover"
 </div>
 <div class="flex items-center justify-between gap-4 border-t border-border px-5 py-4">
 <div>
-<p class="font-heading text-base font-semibold text-foreground">Transmisión en directo</p>
 <p class="text-sm text-muted-foreground">El video se carga solo cuando lo reproducís.</p>
 </div>
 <span class="font-condensed text-xs uppercase tracking-widest text-muted-foreground">YouTube</span>
@@ -336,6 +313,23 @@ Y toda Argentina por delante.
 <p class="mt-4 leading-relaxed text-muted-foreground">
 Muy pronto comenzaremos un viaje recorriendo el país transmitiendo desde la ruta, visitando radios de cada pueblo y compartiendo historias reales, música y experiencias únicas.
 </p>
+<p class="mt-4 leading-relaxed text-muted-foreground">
+Un proyecto de radio streaming itinerante para recorrer toda Argentina transmitiendo desde un Estudio Radio Móvil 🚐📡
+</p>
+<div id="quienes-extra" class="hidden mt-4 leading-relaxed text-muted-foreground">
+<p>Vamos a visitar radios locales, conocer historias reales, documentar cada viaje y conectar pueblos desde la ruta.</p>
+<p class="mt-4">
+Esto no es solamente una radio.<br>
+Es una aventura.<br>
+Un sueño hecho realidad.<br>
+Y un viaje que recién comienza.
+</p>
+<p class="mt-4">🇦🇷 De Lugano a toda Argentina.</p>
+</div>
+<button type="button" id="quienes-vermas" class="mt-3 inline-flex items-center gap-1 font-condensed text-sm font-semibold uppercase tracking-wider text-primary transition-opacity hover:opacity-80">
+<span id="quienes-vermas-label">Ver más</span>
+<i data-lucide="chevron-down" id="quienes-vermas-icon" class="h-4 w-4 transition-transform" aria-hidden="true"></i>
+</button>
 <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
 <li class="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
 <span aria-hidden="true">📍</span>
@@ -440,10 +434,6 @@ Muy pronto comenzaremos un viaje recorriendo el país transmitiendo desde la rut
 </svg>
 Escribinos por WhatsApp
 </a>
-<a href="#en-vivo" class="flex flex-1 items-center justify-center gap-2 rounded-xl border border-live px-5 py-3 font-condensed text-sm font-semibold uppercase tracking-wider text-live transition-colors hover:bg-live/10">
-<i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
-Ver en vivo
-</a>
 </div>
 <!-- contact form (Formspree) -->
 <form action="https://formspree.io/f/mrewyyyd" method="POST" class="mt-6 space-y-3 border-t border-border pt-6">
@@ -527,30 +517,17 @@ Coproducción: Radio Lugano 1y2 Producciones y Filosofía Producciones
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
 lucide.createIcons();
-// --- Tabs Vivo / Música ---
-const tabVivo = document.getElementById('tab-vivo');
-const tabMusica = document.getElementById('tab-musica');
-const playerLabel = document.getElementById('player-label');
-let currentTab = 'vivo';
-function setTab(tab) {
-currentTab = tab;
-const activeClasses = ['bg-primary', 'text-primary-foreground'];
-const inactiveClasses = ['text-muted-foreground'];
-if (tab === 'vivo') {
-tabVivo.classList.add(...activeClasses);
-tabVivo.classList.remove(...inactiveClasses);
-tabMusica.classList.remove(...activeClasses);
-tabMusica.classList.add(...inactiveClasses);
-} else {
-tabMusica.classList.add(...activeClasses);
-tabMusica.classList.remove(...inactiveClasses);
-tabVivo.classList.remove(...activeClasses);
-tabVivo.classList.add(...inactiveClasses);
-}
-playerLabel.textContent = tab === 'vivo' ? 'Transmisión en vivo' : 'Música continua';
-}
-tabVivo.addEventListener('click', () => setTab('vivo'));
-tabMusica.addEventListener('click', () => setTab('musica'));
+// --- Quienes somos: ver más / ver menos ---
+const quienesBtn = document.getElementById('quienes-vermas');
+const quienesExtra = document.getElementById('quienes-extra');
+const quienesLabel = document.getElementById('quienes-vermas-label');
+const quienesIcon = document.getElementById('quienes-vermas-icon');
+quienesBtn.addEventListener('click', () => {
+const isHidden = quienesExtra.classList.contains('hidden');
+quienesExtra.classList.toggle('hidden');
+quienesLabel.textContent = isHidden ? 'Ver menos' : 'Ver más';
+quienesIcon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+});
 // --- Play / Pause toggle ---
 const playToggle = document.getElementById('play-toggle');
 const playIcon = document.getElementById('play-icon');
