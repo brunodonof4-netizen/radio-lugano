@@ -2,10 +2,15 @@
 <html lang="es" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radio Lugano 1y2 — Una radio. Un viaje. Todo un país.</title>
 <meta name="description" content="Radio comunitaria de Villa Lugano, CABA. En vivo las 24hs. Una radio. Un viaje. Todo un país.">
-<meta name="theme-color" content="#07070a">
+<meta name="theme-color" content="#08080b">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/images/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lugano 1y2">
 <!-- Fuentes (next/font/google -> Google Fonts CDN) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,6 +133,11 @@ class="relative mx-auto h-auto w-full max-w-[340px] object-contain drop-shadow-[
 <!-- player block -->
 <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[1.3fr_1fr]">
 <div class="rounded-2xl border border-border bg-card p-5">
+<!-- offline banner: oculto por defecto, se muestra con JS si no hay conexión -->
+<div id="offline-banner" class="hidden mb-4 flex items-center gap-2 rounded-lg bg-live/15 px-3 py-2">
+<i data-lucide="wifi-off" class="h-4 w-4 shrink-0 text-live" aria-hidden="true"></i>
+<p class="font-condensed text-xs uppercase tracking-wider text-live">Sin conexión a internet — el streaming en vivo no está disponible</p>
+</div>
 <!-- tabs -->
 <div class="flex gap-1 rounded-xl bg-secondary p-1">
 <button type="button" id="tab-audio"
@@ -171,7 +181,7 @@ Tocá play para escuchar
 <!-- ver canal de streaming -->
 <a href="#en-vivo" class="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5 text-center transition-colors hover:border-primary/50">
 <span class="grid h-11 w-11 place-items-center rounded-full bg-primary/15 text-primary transition-transform group-hover:scale-105">
-<i data-lucide="youtube" class="h-5 w-5" aria-hidden="true"></i>
+<i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
 </span>
 <span class="font-condensed text-sm font-semibold uppercase tracking-wider text-foreground">
 Ver canal de streaming
@@ -215,11 +225,11 @@ class="absolute inset-0 h-full w-full object-cover"
 </header>
 <!-- PROGRAMACIÓN: agregar nuevos programas duplicando un <li> y actualizando horario y nombre -->
 <ul class="space-y-2">
-<li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
-<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-muted-foreground tabular-nums">06 – 12</span>
+<li class="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3">
+<span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-primary tabular-nums">06 – 12</span>
 <div class="min-w-0 flex-1">
-<p class="truncate font-heading text-base font-semibold text-muted-foreground">Espacio disponible</p>
-<p class="truncate text-sm text-muted-foreground/70">Tu programa de radio acá</p>
+<p class="truncate font-heading text-base font-semibold text-foreground">Radio Lugano 1y2 Viajeros</p>
+<p class="truncate text-sm text-muted-foreground">Con Hernán y Gaby</p>
 </div>
 </li>
 <li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
@@ -514,9 +524,13 @@ Coproducción: Radio Lugano 1y2 Producciones y Filosofía Producciones
 </nav>
 </div>
 <!-- Lucide icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/lucide@1.23.0"></script>
 <script>
-lucide.createIcons();
+if (window.lucide) {
+  lucide.createIcons();
+} else {
+  console.error('Lucide no cargó: los íconos <i data-lucide="..."> quedarán vacíos.');
+}
 // --- Quienes somos: ver más / ver menos ---
 const quienesBtn = document.getElementById('quienes-vermas');
 const quienesExtra = document.getElementById('quienes-extra');
@@ -584,6 +598,27 @@ bar.classList.toggle('animate-pulse', playing);
       document.getElementById('ruta-error').classList.remove('hidden');
     });
 })();
+
+// --- Banner de conexión (streaming) ---
+(function() {
+  const banner = document.getElementById('offline-banner');
+  if (!banner) return;
+  function updateOnlineStatus() {
+    banner.classList.toggle('hidden', navigator.onLine);
+  }
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  updateOnlineStatus();
+})();
+
+// --- Registro del service worker (cache de assets estáticos) ---
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.error('No se pudo registrar el service worker:', err);
+    });
+  });
+}
 
 document.getElementById('live-play-btn').addEventListener('click', function () {
 const wrap = document.getElementById('live-video-wrap');
