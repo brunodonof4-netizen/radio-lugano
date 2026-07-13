@@ -7,6 +7,7 @@
 <meta name="description" content="Radio comunitaria de Villa Lugano, CABA. En vivo las 24hs. Una radio. Un viaje. Todo un país.">
 <meta name="theme-color" content="#08080b">
 <link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/images/favicon.ico">
 <link rel="apple-touch-icon" href="/images/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -101,6 +102,12 @@ Radio Lugano <span class="text-primary">1y2</span>
 Quiénes somos
 </span>
 </a>
+<button type="button" id="install-btn" class="hidden inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-primary-foreground transition-transform active:scale-95">
+<i data-lucide="download" class="h-3.5 w-3.5" aria-hidden="true"></i>
+<span class="font-condensed text-xs font-semibold uppercase tracking-widest">
+Descargar
+</span>
+</button>
 </div>
 </header>
 <div class="min-h-screen bg-background">
@@ -229,7 +236,7 @@ class="absolute inset-0 h-full w-full object-cover"
 <span class="w-16 shrink-0 font-condensed text-sm uppercase tracking-wider text-primary tabular-nums">06 – 12</span>
 <div class="min-w-0 flex-1">
 <p class="truncate font-heading text-base font-semibold text-foreground">Radio Lugano 1y2 Viajeros</p>
-<p class="truncate text-sm text-muted-foreground">Con Hernán y Gaby</p>
+<p class="truncate text-sm text-muted-foreground">Con Hernán y Gabriel</p>
 </div>
 </li>
 <li class="flex items-center gap-4 rounded-xl border border-dashed border-border bg-card/60 px-4 py-3">
@@ -265,8 +272,8 @@ class="absolute inset-0 h-full w-full object-cover"
       <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Espacio publicitario</h2>
     </div>
   </header>
-  <!-- Banner placeholder -->
-  <div class="relative overflow-hidden rounded-2xl border border-dashed border-primary/40 bg-card/60">
+  <!-- Banner: placeholder por defecto, se reemplaza por video si ads.json tiene anuncios activos -->
+  <div id="ad-banner-container" class="relative overflow-hidden rounded-2xl border border-dashed border-primary/40 bg-card/60">
     <!-- Imagen placeholder — reemplazar src por el arte real cuando haya anunciante -->
     <div class="flex min-h-[140px] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 px-6 py-10 sm:min-h-[180px]">
       <div class="text-center">
@@ -597,6 +604,70 @@ bar.classList.toggle('animate-pulse', playing);
     .catch(() => {
       document.getElementById('ruta-error').classList.remove('hidden');
     });
+})();
+
+// --- Espacio publicitario: video en loop desde ads.json ---
+(function() {
+  const container = document.getElementById('ad-banner-container');
+  if (!container) return;
+  const idPattern = /^[\w-]{11}$/; // formato estándar de un ID de video de YouTube
+
+  fetch('./ads.json')
+    .then((res) => {
+      if (!res.ok) throw new Error('ads.json respondió ' + res.status);
+      return res.json();
+    })
+    .then((data) => {
+      const activos = (Array.isArray(data.videos) ? data.videos : [])
+        .filter((v) => v && v.activo && idPattern.test(v.youtube_id))
+        .map((v) => v.youtube_id);
+
+      if (activos.length === 0) return; // sin anuncios activos: se deja el placeholder
+
+      const ids = activos.join(',');
+      const src = `https://www.youtube.com/embed/${activos[0]}?autoplay=1&mute=1&loop=1&playlist=${ids}&controls=0&modestbranding=1&playsinline=1&rel=0`;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = 'Publicidad — Radio Lugano 1y2';
+      iframe.className = 'aspect-video w-full';
+      iframe.loading = 'lazy';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.setAttribute('allowfullscreen', '');
+
+      container.replaceChildren(iframe);
+    })
+    .catch((err) => {
+      console.error('No se pudo cargar el espacio publicitario:', err);
+      // ante un error, se deja el placeholder tal como está
+    });
+})();
+
+// --- Botón de instalación custom (solo Chrome/Edge/Samsung Internet) ---
+(function() {
+  const installBtn = document.getElementById('install-btn');
+  if (!installBtn) return;
+  let deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.classList.remove('hidden');
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installBtn.classList.add('hidden');
+  });
+
+  window.addEventListener('appinstalled', () => {
+    installBtn.classList.add('hidden');
+    deferredPrompt = null;
+  });
 })();
 
 // --- Banner de conexión (streaming) ---
