@@ -2,7 +2,7 @@
 // Alcance: cachear assets estáticos propios para que carguen más rápido
 // en visitas repetidas. NO implementa funcionalidad offline completa
 // (decisión de proyecto: no tiene sentido para una radio online).
-const CACHE_NAME = 'radio-lugano-v3';
+const CACHE_NAME = 'radio-lugano-v4';
 
 const PRECACHE_ASSETS = [
   '/',
