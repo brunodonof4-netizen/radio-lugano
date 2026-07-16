@@ -159,6 +159,7 @@ Video
 </a>
 </div>
 <!-- play control -->
+<audio id="radio-stream" preload="none" src="https://server.radiostreaming.com.ar/8634/stream"></audio>
 <div class="mt-6 flex items-center gap-5">
 <button type="button" id="play-toggle" aria-label="Reproducir transmisión"
 class="play-ring group relative grid h-20 w-20 shrink-0 place-items-center rounded-full p-[3px] transition-transform active:scale-95">
@@ -549,25 +550,72 @@ quienesExtra.classList.toggle('hidden');
 quienesLabel.textContent = isHidden ? 'Ver menos' : 'Ver más';
 quienesIcon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
 });
-// --- Play / Pause toggle ---
-const playToggle = document.getElementById('play-toggle');
-const playIcon = document.getElementById('play-icon');
-const pauseIcon = document.getElementById('pause-icon');
-const playerStatus = document.getElementById('player-status');
-const equalizerBars = document.querySelectorAll('#equalizer span');
-const barHeights = [10, 18, 8, 22, 14, 20, 9, 16, 12];
-let playing = false;
-playToggle.addEventListener('click', () => {
-playing = !playing;
-playIcon.classList.toggle('hidden', playing);
-pauseIcon.classList.toggle('hidden', !playing);
-playToggle.setAttribute('aria-label', playing ? 'Pausar transmisión' : 'Reproducir transmisión');
-playerStatus.textContent = playing ? 'Reproduciendo…' : 'Tocá play para escuchar';
-equalizerBars.forEach((bar, i) => {
-bar.style.height = (playing ? barHeights[i] : 4) + 'px';
-bar.classList.toggle('animate-pulse', playing);
-});
-});
+// --- Reproductor de audio en vivo ---
+(function() {
+  const audio = document.getElementById('radio-stream');
+  const playToggle = document.getElementById('play-toggle');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon = document.getElementById('pause-icon');
+  const playerStatus = document.getElementById('player-status');
+  const equalizerBars = document.querySelectorAll('#equalizer span');
+  const barHeights = [10, 18, 8, 22, 14, 20, 9, 16, 12];
+
+  function setEqualizer(active) {
+    equalizerBars.forEach((bar, i) => {
+      bar.style.height = (active ? barHeights[i] : 4) + 'px';
+      bar.classList.toggle('animate-pulse', active);
+    });
+  }
+
+  function setStatus(text) {
+    playerStatus.textContent = text;
+  }
+
+  playToggle.addEventListener('click', () => {
+    if (audio.paused) {
+      setStatus('Conectando…');
+      audio.play().catch(() => {
+        setStatus('No se pudo conectar. Probá de nuevo.');
+      });
+    } else {
+      audio.pause();
+    }
+  });
+
+  // Eventos reales del elemento <audio>, no estado optimista
+  audio.addEventListener('waiting', () => setStatus('Conectando…'));
+  audio.addEventListener('playing', () => {
+    playIcon.classList.add('hidden');
+    pauseIcon.classList.remove('hidden');
+    playToggle.setAttribute('aria-label', 'Pausar transmisión');
+    setStatus('En vivo');
+    setEqualizer(true);
+  });
+  audio.addEventListener('pause', () => {
+    playIcon.classList.remove('hidden');
+    pauseIcon.classList.add('hidden');
+    playToggle.setAttribute('aria-label', 'Reproducir transmisión');
+    setStatus('Tocá play para escuchar');
+    setEqualizer(false);
+  });
+  audio.addEventListener('error', () => {
+    playIcon.classList.remove('hidden');
+    pauseIcon.classList.add('hidden');
+    setStatus('Stream no disponible. Probá de nuevo en un momento.');
+    setEqualizer(false);
+  });
+
+  // Media Session API: controles desde la pantalla de bloqueo, donde el
+  // navegador lo soporte. No rompe nada si no está disponible.
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: 'Radio Lugano 1y2 — En vivo',
+      artist: 'Radio Lugano 1y2',
+    });
+    navigator.mediaSession.setActionHandler('play', () => audio.play().catch(() => {}));
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+  }
+})();
 // --- Live video lazy-load ---
 (function() {
   const CONFIG = {
