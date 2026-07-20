@@ -1,0 +1,33 @@
+# Variables de entorno y credenciales
+.env
+.env.*
+!.env.example
+
+# Archivos de claves/contraseñas sueltos (el patrón del incidente)
+*.claves*
+*claves*.txt
+*credenciales*
+*.pem
+*.key
+id_rsa*
+.ssh/
+.gnupg/
+.git-credentials
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Netlify (si en algún momento usás CLI local)
+.netlify/
+
+# Node (por si en algún proyecto futuro sumás tooling)
+node_modules/
+npm-debug.log*
+
+# Backups y archivos temporales
+*.bak
+*.tmp
+*~
