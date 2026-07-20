@@ -654,11 +654,20 @@ quienesIcon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
     });
 })();
 
-// --- Espacio publicitario: video en loop desde ads.json ---
+// --- Espacio publicitario: video en loop desde ads.json (autohosteado, no YouTube) ---
 (function() {
   const container = document.getElementById('ad-banner-container');
   if (!container) return;
-  const idPattern = /^[\w-]{11}$/; // formato estándar de un ID de video de YouTube
+
+  // Valida que sea una URL https absoluta (evita inyectar rutas raras vía ads.json)
+  const esUrlValida = (u) => {
+    try {
+      const parsed = new URL(u);
+      return parsed.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  };
 
   fetch('./ads.json')
     .then((res) => {
@@ -667,24 +676,40 @@ quienesIcon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
     })
     .then((data) => {
       const activos = (Array.isArray(data.videos) ? data.videos : [])
-        .filter((v) => v && v.activo && idPattern.test(v.youtube_id))
-        .map((v) => v.youtube_id);
+        .filter((v) => v && v.activo && esUrlValida(v.url))
+        .map((v) => v.url);
 
       if (activos.length === 0) return; // sin anuncios activos: se deja el placeholder
 
-      const ids = activos.join(',');
-      const src = `https://www.youtube.com/embed/${activos[0]}?autoplay=1&mute=1&loop=1&playlist=${ids}&controls=0&modestbranding=1&playsinline=1&rel=0`;
+      const video = document.createElement('video');
+      video.className = 'aspect-video w-full';
+      video.muted = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.setAttribute('title', 'Publicidad — Radio Lugano 1y2');
+      video.setAttribute('aria-label', 'Publicidad — Radio Lugano 1y2');
 
-      const iframe = document.createElement('iframe');
-      iframe.src = src;
-      iframe.title = 'Publicidad — Radio Lugano 1y2';
-      iframe.className = 'aspect-video w-full';
-      iframe.loading = 'lazy';
-      iframe.allow = 'autoplay; encrypted-media';
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      iframe.setAttribute('allowfullscreen', '');
+      if (activos.length === 1) {
+        // Un solo anuncio activo: loop nativo, sin JS de rotación
+        video.loop = true;
+        video.src = activos[0];
+      } else {
+        // Varios anuncios activos: rotación manual en orden, sin loop nativo
+        let indice = 0;
+        video.src = activos[indice];
+        video.addEventListener('ended', () => {
+          indice = (indice + 1) % activos.length;
+          video.src = activos[indice];
+          video.play().catch(() => {});
+        });
+      }
 
-      container.replaceChildren(iframe);
+      video.play().catch(() => {
+        // Autoplay bloqueado por el navegador: queda pausado en el primer frame,
+        // no rompe el layout. Poco probable estando muted, pero por las dudas.
+      });
+
+      container.replaceChildren(video);
     })
     .catch((err) => {
       console.error('No se pudo cargar el espacio publicitario:', err);

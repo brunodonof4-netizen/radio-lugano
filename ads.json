@@ -1,5 +1,6 @@
 {
   "videos": [
-    { "youtube_id": "CBOblcwBcjQ", "activo": true }
+    { "url": "https://adsbanner.brunodonof4.workers.dev/RodantesLozano.mp4", "activo": true },
+    { "url": "https://adsbanner.brunodonof4.workers.dev/radiolugano.mp4", "activo": true }
   ]
 }
