@@ -186,15 +186,40 @@ Tocá play para escuchar
 </div>
 </div>
 </div>
-<!-- ver canal de streaming -->
-<a href="#en-vivo" class="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5 text-center transition-colors hover:border-primary/50">
-<span class="grid h-11 w-11 place-items-center rounded-full bg-primary/15 text-primary transition-transform group-hover:scale-105">
-<i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
-</span>
-<span class="font-condensed text-sm font-semibold uppercase tracking-wider text-foreground">
-Ver canal de streaming
-</span>
-</a>
+<!-- ESPACIO PUBLICITARIO SECTION -->
+<!-- Para agregar un anuncio: reemplazar la imagen placeholder por el arte del cliente (recomendado WebP, max 300KB) -->
+<!-- Si se decide usar video (WebM/VP9), reemplazar el <img> por <video autoplay muted loop playsinline> -->
+<section id="espacio-publicitario" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-10">
+  <header class="mb-4 flex items-end justify-between">
+    <div>
+      <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Publicidad</span>
+      <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Espacio publicitario</h2>
+    </div>
+  </header>
+  <!-- Banner: placeholder por defecto, se reemplaza por video si ads.json tiene anuncios activos -->
+  <div id="ad-banner-container" class="relative overflow-hidden rounded-2xl border border-dashed border-primary/40 bg-card/60">
+    <!-- Imagen placeholder — reemplazar src por el arte real cuando haya anunciante -->
+    <div class="flex min-h-[140px] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 px-6 py-10 sm:min-h-[180px]">
+      <div class="text-center">
+        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-primary/50 text-primary">
+          <i data-lucide="megaphone" class="h-6 w-6" aria-hidden="true"></i>
+        </div>
+        <p class="font-heading text-lg font-bold text-foreground">Poné tu aviso publicitario acá</p>
+        <p class="mt-1 text-sm text-muted-foreground">Llegá a la audiencia de Radio Lugano 1y2</p>
+      </div>
+    </div>
+  </div>
+  <!-- CTA con flecha apuntando al banner -->
+  <div class="mt-4 flex items-center gap-2">
+    <i data-lucide="arrow-up" class="h-4 w-4 shrink-0 text-primary" aria-hidden="true"></i>
+    <p class="text-sm text-muted-foreground">
+      Publicá tu anuncio acá —
+      <a href="https://wa.me/5491127857001?text=Hola%2C%20me%20interesa%20publicitar%20en%20Radio%20Lugano%201y2" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary underline underline-offset-2 hover:opacity-80">
+        consultanos por WhatsApp
+      </a>
+    </p>
+  </div>
+</section>
 </div>
 </div>
 </section>
@@ -263,40 +288,21 @@ class="absolute inset-0 h-full w-full object-cover"
 </li>
 </ul>
 </section>
-<!-- ESPACIO PUBLICITARIO SECTION -->
-<!-- Para agregar un anuncio: reemplazar la imagen placeholder por el arte del cliente (recomendado WebP, max 300KB) -->
-<!-- Si se decide usar video (WebM/VP9), reemplazar el <img> por <video autoplay muted loop playsinline> -->
-<section id="espacio-publicitario" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-10">
-  <header class="mb-4 flex items-end justify-between">
-    <div>
-      <span class="font-condensed text-xs uppercase tracking-[0.3em] text-primary">Publicidad</span>
-      <h2 class="mt-2 font-heading text-2xl font-bold tracking-tight sm:text-3xl">Espacio publicitario</h2>
-    </div>
-  </header>
-  <!-- Banner: placeholder por defecto, se reemplaza por video si ads.json tiene anuncios activos -->
-  <div id="ad-banner-container" class="relative overflow-hidden rounded-2xl border border-dashed border-primary/40 bg-card/60">
-    <!-- Imagen placeholder — reemplazar src por el arte real cuando haya anunciante -->
-    <div class="flex min-h-[140px] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 px-6 py-10 sm:min-h-[180px]">
-      <div class="text-center">
-        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-primary/50 text-primary">
-          <i data-lucide="megaphone" class="h-6 w-6" aria-hidden="true"></i>
-        </div>
-        <p class="font-heading text-lg font-bold text-foreground">Poné tu aviso publicitario acá</p>
-        <p class="mt-1 text-sm text-muted-foreground">Llegá a la audiencia de Radio Lugano 1y2</p>
-      </div>
-    </div>
-  </div>
-  <!-- CTA con flecha apuntando al banner -->
-  <div class="mt-4 flex items-center gap-2">
-    <i data-lucide="arrow-up" class="h-4 w-4 shrink-0 text-primary" aria-hidden="true"></i>
-    <p class="text-sm text-muted-foreground">
-      Publicá tu anuncio acá —
-      <a href="https://wa.me/5491127857001?text=Hola%2C%20me%20interesa%20publicitar%20en%20Radio%20Lugano%201y2" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary underline underline-offset-2 hover:opacity-80">
-        consultanos por WhatsApp
-      </a>
-    </p>
+<!-- VER CANAL DE STREAMING SECTION (reubicado desde el hero) -->
+<section id="ver-canal" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-10">
+  <div class="mx-auto max-w-xs">
+<!-- ver canal de streaming -->
+<a href="#en-vivo" class="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-gradient-to-br from-card to-secondary p-5 text-center transition-colors hover:border-primary/50">
+<span class="grid h-11 w-11 place-items-center rounded-full bg-primary/15 text-primary transition-transform group-hover:scale-105">
+<i data-lucide="radio" class="h-5 w-5" aria-hidden="true"></i>
+</span>
+<span class="font-condensed text-sm font-semibold uppercase tracking-wider text-foreground">
+Ver canal de streaming
+</span>
+</a>
   </div>
 </section>
+
 <!-- NUESTRA RUTA SECTION -->
 <section id="nuestra-ruta" class="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-12">
   <header class="mb-8">
